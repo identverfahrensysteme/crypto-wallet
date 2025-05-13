@@ -44,7 +44,9 @@ function showAdminPanel() {
   USERS.forEach((u, i) => {
     if (u.username !== "admin") {
       const li = document.createElement("li");
-      li.innerHTML = `${u.username} – ${u.btc} BTC, ${u.usdt} USDT <button style='margin-left:10px;font-size:0.75rem;' onclick='deleteUser(${i})'>❌</button>`;
+      li.innerHTML = `\${u.username} – \${u.btc} BTC, \${u.usdt} USDT 
+        <button style='margin-left:5px;font-size:0.75rem;' onclick='editUser(${i})'>✏️</button>
+        <button style='margin-left:5px;font-size:0.75rem;' onclick='deleteUser(${i})'>❌</button>`;
       userList.appendChild(li);
     }
   });
@@ -98,6 +100,20 @@ function login() {
     location.reload();
   } else {
     alert("Incorrect credentials");
+  }
+}
+
+function editUser(index) {
+  const u = USERS[index];
+  const newBTC = prompt(`Neuer BTC-Betrag für ${u.username}:`, u.btc);
+  const newUSDT = prompt(`Neuer USDT-Betrag für ${u.username}:`, u.usdt);
+  if (!isNaN(newBTC) && !isNaN(newUSDT)) {
+    USERS[index].btc = parseFloat(newBTC);
+    USERS[index].usdt = parseFloat(newUSDT);
+    alert("Guthaben aktualisiert. Seite wird neu geladen.");
+    location.reload();
+  } else {
+    alert("Ungültige Eingabe.");
   }
 }
 
