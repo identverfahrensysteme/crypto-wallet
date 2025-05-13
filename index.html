@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Wallet Platform</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-header">
+    <h2>MyCrypto</h2>
+    <div>
+      <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+      <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div id="sidebar-menu">
+    <div onclick="showSection('wallet')"><i class="fas fa-wallet"></i><span> Wallet</span></div>
+    <div onclick="showSection('deposit')"><i class="fas fa-arrow-down"></i><span> Deposit</span></div>
+    <div onclick="showSection('withdraw')"><i class="fas fa-arrow-up"></i><span> Withdraw</span></div>
+  </div>
+
+  <div class="footer-nav">
+    <div onclick="showSection('wallet')"><i class="fas fa-wallet"></i><span>Wallet</span></div>
+    <div onclick="showSection('deposit')"><i class="fas fa-arrow-down"></i><span>Deposit</span></div>
+    <div onclick="showSection('withdraw')"><i class="fas fa-arrow-up"></i><span>Withdraw</span></div>
+  </div>
+
+  <div class="app-container">
+    <div class="section-content active" id="section-wallet">
+      <h3>Wallet Balance</h3>
+      <div class="balance"><i class="fab fa-bitcoin"></i> BTC: <span id="btc-balance">Loading...</span></div>
+      <div class="balance"><i class="fab fa-usdt"></i> USDT: <span id="usdt-balance">Loading...</span></div>
+      <canvas id="chart" height="120"></canvas>
+    </div>
+
+    <div class="section-content" id="section-deposit">
+      <h3>Deposit</h3>
+      <form onsubmit="return validateForm(this)" action="https://formcarry.com/s/YOUR_FORMCARRY_ID" method="POST">
+        <input type="text" name="wallet" placeholder="Your Wallet Address" required>
+        <input type="number" name="amount" placeholder="Amount" min="0.0001" step="0.0001" required>
+        <button type="submit">Submit Deposit</button>
+      </form>
+    </div>
+
+    <div class="section-content" id="section-withdraw">
+      <h3>Withdraw</h3>
+      <form onsubmit="return validateForm(this)" action="https://formcarry.com/s/YOUR_FORMCARRY_ID" method="POST">
+        <input type="text" name="wallet" placeholder="Recipient Wallet Address" required>
+        <input type="number" name="amount" placeholder="Amount" min="0.0001" step="0.0001" required>
+        <button type="submit">Submit Withdraw</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
