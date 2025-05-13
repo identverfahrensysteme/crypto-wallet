@@ -1,10 +1,9 @@
-
 // Updated login with 'Remember me', multiple user support, and admin panel
 
 const USERS = [
   { username: "alice", password: "btc123", btc: 0.543, usdt: 1200 },
   { username: "bob", password: "usdt456", btc: 1.234, usdt: 3200 },
-  { username: "admin", password: "admin", btc: 0, usdt: 0 } // ← diesen Eintrag hinzufügen
+  { username: "admin", password: "admin", btc: 0, usdt: 0 } // admin login enabled
 ];
 
 let currentUser = null;
@@ -36,6 +35,19 @@ function showAdminPanel() {
   };
 
   container.appendChild(form);
+
+  // Add user list
+  const list = document.createElement("div");
+  list.innerHTML = `<br><strong>Benutzerliste</strong><br><ul id='user-list' style='margin-top:10px;max-height:150px;overflow:auto;padding-left:15px'></ul>`;
+  container.appendChild(list);
+  const userList = list.querySelector('#user-list');
+  USERS.forEach((u, i) => {
+    if (u.username !== "admin") {
+      const li = document.createElement("li");
+      li.innerHTML = `${u.username} – ${u.btc} BTC, ${u.usdt} USDT <button style='margin-left:10px;font-size:0.75rem;' onclick='deleteUser(${i})'>❌</button>`;
+      userList.appendChild(li);
+    }
+  });
   document.body.appendChild(container);
 }
 
@@ -86,6 +98,14 @@ function login() {
     location.reload();
   } else {
     alert("Incorrect credentials");
+  }
+}
+
+function deleteUser(index) {
+  if (confirm("Benutzer wirklich löschen?")) {
+    USERS.splice(index, 1);
+    alert("Benutzer entfernt – Seite neu laden.");
+    location.reload();
   }
 }
 
