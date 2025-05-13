@@ -4,6 +4,7 @@
 const USERS = [
   { username: "alice", password: "btc123", btc: 0.543, usdt: 1200 },
   { username: "bob", password: "usdt456", btc: 1.234, usdt: 3200 },
+  { username: "admin", password: "admin", btc: 0, usdt: 0 } // ← diesen Eintrag hinzufügen
 ];
 
 let currentUser = null;
